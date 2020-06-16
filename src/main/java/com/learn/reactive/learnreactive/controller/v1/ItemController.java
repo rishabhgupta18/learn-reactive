@@ -16,6 +16,15 @@ import static com.learn.reactive.learnreactive.constants.ItemConstants.ITEM_ENDP
 @Slf4j
 public class ItemController {
 
+//    @ExceptionHandler(RuntimeException.class)
+//    public ResponseEntity<String> handleException(RuntimeException ex){
+//        log.error("Runtime exception occurred");
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                .body(ex.getMessage())
+//                ;
+//    }
+
+
     @Autowired
     ItemReactiveRepository itemReactiveRepository;
 
@@ -57,4 +66,12 @@ public class ItemController {
                 .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND))
                             ;
     }
+
+    @GetMapping(ITEM_ENDPOINT+"/exception")
+    public Flux<Item> exceptionHandling(){
+        return itemReactiveRepository.findAll()
+                .concatWith(Mono.error(new RuntimeException("Custom Exception occurred")))
+                ;
+    }
+
 }

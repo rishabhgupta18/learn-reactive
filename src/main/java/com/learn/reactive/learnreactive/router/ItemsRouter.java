@@ -22,4 +22,14 @@ public class ItemsRouter {
                 , itemsHandler::getAllItems
         );
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> exceptionRoute(ItemsHandler itemsHandler){
+        return RouterFunctions
+                .route(
+                        RequestPredicates.GET("/functional/exception")
+                                .and(RequestPredicates.accept(MediaType.APPLICATION_JSON))
+                        , itemsHandler::exception
+                );
+    }
 }

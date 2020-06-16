@@ -21,6 +21,11 @@ public class ItemDataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         initialDataSetup();
+        createCappedCollection();
+    }
+
+    private void createCappedCollection() {
+        
     }
 
     public static List<Item> data(){

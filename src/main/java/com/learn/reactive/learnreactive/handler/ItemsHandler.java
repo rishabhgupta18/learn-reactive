@@ -21,4 +21,8 @@ public class ItemsHandler {
                 .body(itemReactiveRepository.findAll(), Item.class)
                 ;
     }
+
+    public Mono<ServerResponse> exception(ServerRequest serverRequest) {
+        throw new RuntimeException("Custom Exception Occurred");
+    }
 }
